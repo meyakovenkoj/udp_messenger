@@ -34,7 +34,6 @@ class Receiver(Thread):
         
         if cast_type == '-m':
             self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) 
-            #self.sock.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, MULTICAST_TTL)
             mreq = struct.pack("4sl", socket.inet_aton(self.UDP_IP), socket.INADDR_ANY)
             self.sock.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
         elif cast_type == '-b':
@@ -80,8 +79,6 @@ if __name__ == "__main__":
         elif sys.argv[1] == '-m':
             multicast_group = str(input('Enter your multicast group: '))
             multicast_port = str(input('Enter your port: '))
-            #direction = str(input('Enter destination ip: '))
-            #direction_port = str(input('Enter destination port: '))
             multicast_threads(multicast_group, multicast_port, sys.argv[1])
         elif sys.argv[1] == '-b':
             source_port = str(input('Enter your port: '))
